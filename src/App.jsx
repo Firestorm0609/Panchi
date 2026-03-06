@@ -223,10 +223,6 @@ function CollectionSection() {
               onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.borderColor = "rgba(212,175,55,0.15)"; e.currentTarget.style.boxShadow = "none"; }}
             >
               <img src={src} alt={`PANCHI #${i + 1}`} style={{ width: "100%", aspectRatio: "1 / 1", objectFit: "cover", display: "block" }} />
-              <div style={{ padding: "14px 18px", borderTop: "1px solid rgba(212,175,55,0.1)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ fontFamily: "'Cinzel', serif", fontSize: "11px", letterSpacing: "2px", color: "#FFD700" }}>PANCHI #{String(i + 1).padStart(4, "0")}</span>
-                <span style={{ fontFamily: "'Cinzel', serif", fontSize: "9px", letterSpacing: "1px", color: "rgba(255,255,255,0.25)" }}>FREE MINT</span>
-              </div>
             </div>
           ))}
         </div>
