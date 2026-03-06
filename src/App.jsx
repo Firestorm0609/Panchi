@@ -1,4 +1,12 @@
 import { useState, useEffect, useRef } from "react";
+import p1 from "./assets/panchi1.png";
+import p2 from "./assets/panchi2.png";
+import p3 from "./assets/panchi3.png";
+import p4 from "./assets/panchi4.png";
+import p5 from "./assets/panchi5.png";
+import p6 from "./assets/panchi6.png";
+
+const NFT_IMAGES = [p1, p2, p3, p4, p5, p6];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PANCHILIST TASKS CONFIG — edit these to change the tasks anytime
@@ -197,7 +205,7 @@ function HeroSection() {
 }
 
 function CollectionSection() {
-  const nfts = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }];
+  const nfts = NFT_IMAGES;
 
   return (
     <div style={{ padding: "100px 48px 120px", background: "linear-gradient(180deg, #050300 0%, #07040080 40%, #060400 100%)", position: "relative", overflow: "hidden" }}>
@@ -209,13 +217,15 @@ function CollectionSection() {
           <div style={{ width: "80px", height: "1px", background: "linear-gradient(to right, transparent, #FFD700, transparent)", margin: "0 auto" }} />
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
-          {nfts.map(({ id }) => (
-            <div key={id} style={{ background: "rgba(212,175,55,0.04)", border: "1px solid rgba(212,175,55,0.15)", borderRadius: "12px", overflow: "hidden", transition: "all 0.4s", cursor: "pointer" }}
+          {nfts.map((src, i) => (
+            <div key={i} style={{ background: "rgba(212,175,55,0.04)", border: "1px solid rgba(212,175,55,0.15)", borderRadius: "12px", overflow: "hidden", transition: "all 0.4s", cursor: "pointer" }}
               onMouseOver={e => { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.borderColor = "rgba(212,175,55,0.4)"; e.currentTarget.style.boxShadow = "0 16px 40px rgba(0,0,0,0.5)"; }}
               onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.borderColor = "rgba(212,175,55,0.15)"; e.currentTarget.style.boxShadow = "none"; }}
             >
-              <div style={{ width: "100%", aspectRatio: "1 / 1", background: "linear-gradient(135deg, rgba(212,175,55,0.08), rgba(255,165,0,0.04))", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ textAlign: "center", opacity: 0.3 }}><div style={{ fontSize: "52px", marginBottom: "8px" }}>🍌</div><div style={{ fontFamily: "'Cinzel', serif", fontSize: "9px", letterSpacing: "3px", color: "#FFD700" }}>YOUR NFT HERE</div></div>
+              <img src={src} alt={`PANCHI #${i + 1}`} style={{ width: "100%", aspectRatio: "1 / 1", objectFit: "cover", display: "block" }} />
+              <div style={{ padding: "14px 18px", borderTop: "1px solid rgba(212,175,55,0.1)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontFamily: "'Cinzel', serif", fontSize: "11px", letterSpacing: "2px", color: "#FFD700" }}>PANCHI #{String(i + 1).padStart(4, "0")}</span>
+                <span style={{ fontFamily: "'Cinzel', serif", fontSize: "9px", letterSpacing: "1px", color: "rgba(255,255,255,0.25)" }}>FREE MINT</span>
               </div>
             </div>
           ))}
