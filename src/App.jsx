@@ -326,7 +326,7 @@ function PanchilistSection({ sectionRef }) {
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 0%, rgba(255,215,0,0.08) 0%, transparent 60%)", pointerEvents: "none" }} />
             <div style={{ fontSize: "64px", marginBottom: "24px", animation: "sealReveal 0.6s ease both" }}>🍌</div>
             <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "clamp(22px, 4vw, 40px)", color: "#FFD700", marginBottom: "16px", filter: "drop-shadow(0 0 20px rgba(255,215,0,0.5))" }}>Trial Complete</div>
-            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "17px", fontStyle: "italic", color: "rgba(255,255,255,0.6)", maxWidth: "460px", margin: "0 auto 28px", lineHeight: "1.8" }}>Your wallet has been recorded. The PANCHI elders will review your application. Watch the Discord for the announcement.</p>
+            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "17px", fontStyle: "italic", color: "rgba(255,255,255,0.6)", maxWidth: "460px", margin: "0 auto 28px", lineHeight: "1.8" }}>Your wallet has been recorded. The PANCHI elders will review your application. Watch the X page for the announcement.</p>
             <div style={{ display: "inline-block", background: "rgba(255,215,0,0.08)", border: "1px solid rgba(255,215,0,0.2)", borderRadius: "8px", padding: "12px 20px", fontFamily: "'Cinzel', serif", fontSize: "11px", letterSpacing: "2px", color: "rgba(212,175,45,0.7)", wordBreak: "break-all" }}>
               {wallet.slice(0, 6)}...{wallet.slice(-6)} — REGISTERED
             </div>
