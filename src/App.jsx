@@ -305,7 +305,7 @@ function PanchilistSection({ sectionRef }) {
                       <div className="task-action" style={{ flexShrink: 0, padding: "10px 18px", background: "rgba(255,215,0,0.08)", border: "1px solid rgba(255,215,0,0.2)", borderRadius: "6px", fontFamily: "'Cinzel', serif", fontSize: "10px", letterSpacing: "2px", color: "#FFD700" }}>DONE ✓</div>
                     ) : pendingId === task.id ? (
                       <div className="task-action" style={{ flexShrink: 0, padding: "10px 18px", background: "rgba(212,175,55,0.05)", border: "1px solid rgba(212,175,55,0.25)", borderRadius: "6px", fontFamily: "'Cinzel', serif", fontSize: "10px", letterSpacing: "2px", color: "rgba(212,175,55,0.7)", minWidth: "90px", textAlign: "center" }}>
-                        VERIFYING {countdown}s
+                        VERIFYING...
                       </div>
                     ) : (
                       <a href={task.actionLink} target="_blank" rel="noopener noreferrer"
