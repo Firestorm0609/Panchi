@@ -219,21 +219,36 @@ function CollectionSection() {
 
 function PanchilistSection({ sectionRef }) {
   const [completed, setCompleted] = useState({});
-  const [wallet, setWallet] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [scanActive, setScanActive] = useState(false);
 
   const allDone = PANCHILIST_TASKS.every(t => completed[t.id]);
   const completedCount = Object.values(completed).filter(Boolean).length;
   const progress = (completedCount / PANCHILIST_TASKS.length) * 100;
+  const [pendingId, setPendingId] = useState(null);
+  const [countdown, setCountdown] = useState(0);
+
   const markDone = (id) => setCompleted(prev => ({ ...prev, [id]: true }));
 
+  const startTrial = (id) => {
+    setPendingId(id);
+    setCountdown(40);
+    const interval = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          setPendingId(null);
+          markDone(id);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
   const handleSubmit = () => {
-    if (!wallet.trim() || !allDone) return;
-    setScanActive(true);
-    setSubmitting(true);
-    setTimeout(() => { setScanActive(false); setSubmitting(false); setSubmitted(true); }, 2800);
+    if (!allDone) return;
+    window.open("https://forms.gle/eXnovSXm9GQesrgK7", "_blank");
+    setTimeout(() => setSubmitted(true), 800);
   };
 
   return (
@@ -286,49 +301,43 @@ function PanchilistSection({ sectionRef }) {
                       <div style={{ fontFamily: "'Cinzel', serif", fontSize: "12px", letterSpacing: "1px", color: done ? "#FFD700" : "rgba(255,255,255,0.75)", marginBottom: "4px" }}>{task.title}</div>
                       <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "14px", color: "rgba(255,255,255,0.4)", lineHeight: "1.5" }}>{task.description}</div>
                     </div>
-                    {!done ? (
+                    {done ? (
+                      <div className="task-action" style={{ flexShrink: 0, padding: "10px 18px", background: "rgba(255,215,0,0.08)", border: "1px solid rgba(255,215,0,0.2)", borderRadius: "6px", fontFamily: "'Cinzel', serif", fontSize: "10px", letterSpacing: "2px", color: "#FFD700" }}>DONE ✓</div>
+                    ) : pendingId === task.id ? (
+                      <div className="task-action" style={{ flexShrink: 0, padding: "10px 18px", background: "rgba(212,175,55,0.05)", border: "1px solid rgba(212,175,55,0.25)", borderRadius: "6px", fontFamily: "'Cinzel', serif", fontSize: "10px", letterSpacing: "2px", color: "rgba(212,175,55,0.7)", minWidth: "90px", textAlign: "center" }}>
+                        VERIFYING {countdown}s
+                      </div>
+                    ) : (
                       <a href={task.actionLink} target="_blank" rel="noopener noreferrer"
-                        onClick={() => setTimeout(() => markDone(task.id), 1200)}
+                        onClick={() => startTrial(task.id)}
                         className="task-action"
                         style={{ flexShrink: 0, padding: "10px 18px", background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.3)", borderRadius: "6px", cursor: "pointer", textDecoration: "none", fontFamily: "'Cinzel', serif", fontSize: "10px", letterSpacing: "2px", color: "#FFD700", transition: "all 0.2s", whiteSpace: "nowrap" }}
                         onMouseOver={e => { e.currentTarget.style.background = "rgba(212,175,55,0.15)"; e.currentTarget.style.borderColor = "#FFD700"; }}
                         onMouseOut={e => { e.currentTarget.style.background = "rgba(212,175,55,0.08)"; e.currentTarget.style.borderColor = "rgba(212,175,55,0.3)"; }}
                       >{task.actionLabel} →</a>
-                    ) : (
-                      <div className="task-action" style={{ flexShrink: 0, padding: "10px 18px", background: "rgba(255,215,0,0.08)", border: "1px solid rgba(255,215,0,0.2)", borderRadius: "6px", fontFamily: "'Cinzel', serif", fontSize: "10px", letterSpacing: "2px", color: "#FFD700" }}>DONE ✓</div>
                     )}
                   </div>
                 );
               })}
             </div>
 
-            <div style={{ background: allDone ? "rgba(255,215,0,0.07)" : "rgba(212,175,55,0.03)", border: `1px solid ${allDone ? "rgba(255,215,0,0.35)" : "rgba(212,175,55,0.1)"}`, borderRadius: "12px", padding: "36px 28px", transition: "all 0.6s", opacity: allDone ? 1 : 0.35, position: "relative", overflow: "hidden" }}>
-              {scanActive && <div style={{ position: "absolute", left: 0, right: 0, height: "2px", background: "linear-gradient(to right, transparent, rgba(255,215,0,0.8), transparent)", animation: "scanLine 1.4s linear infinite", pointerEvents: "none", zIndex: 2 }} />}
-              <div style={{ textAlign: "center", marginBottom: "24px" }}>
-                <div style={{ fontSize: "28px", marginBottom: "10px" }}>🏛️</div>
-                <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "18px", color: "#FFD700", marginBottom: "8px" }}>{allDone ? "Present Your Wallet" : "Complete All Trials First"}</div>
-                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "15px", fontStyle: "italic", color: "rgba(255,255,255,0.45)", margin: 0 }}>{allDone ? "You have proven yourself worthy. Submit your Ethereum wallet address to claim your panchilist spot." : `Complete all ${PANCHILIST_TASKS.length} trials above to unlock this.`}</p>
-              </div>
-              <div className="wallet-row" style={{ display: "flex", gap: "12px" }}>
-                <input type="text" placeholder="Your Ethereum wallet address (0x...)" value={wallet} onChange={e => setWallet(e.target.value)} disabled={!allDone || submitting}
-                  style={{ flex: 1, padding: "14px 16px", background: "rgba(212,175,55,0.04)", border: "1px solid rgba(212,175,55,0.2)", borderRadius: "6px", fontFamily: "'EB Garamond', serif", fontSize: "16px", color: "rgba(255,255,255,0.8)", outline: "none", transition: "border-color 0.2s" }}
-                  onFocus={e => e.target.style.borderColor = "rgba(255,215,0,0.5)"}
-                  onBlur={e => e.target.style.borderColor = "rgba(212,175,55,0.2)"}
-                />
-                <button onClick={handleSubmit} disabled={!allDone || !wallet.trim() || submitting}
-                  style={{ padding: "14px 28px", borderRadius: "6px", border: "none", cursor: allDone && wallet.trim() ? "pointer" : "not-allowed", background: allDone && wallet.trim() ? "linear-gradient(135deg, #FFD700, #FFA500)" : "rgba(212,175,55,0.08)", fontFamily: "'Cinzel', serif", fontSize: "12px", letterSpacing: "2px", color: allDone && wallet.trim() ? "#000" : "rgba(255,255,255,0.2)", fontWeight: "700", boxShadow: allDone && wallet.trim() ? "0 0 24px rgba(255,215,0,0.35)" : "none", transition: "all 0.3s", whiteSpace: "nowrap" }}
-                >{submitting ? "VERIFYING..." : "SUBMIT →"}</button>
-              </div>
+            <div style={{ background: allDone ? "rgba(255,215,0,0.07)" : "rgba(212,175,55,0.03)", border: `1px solid ${allDone ? "rgba(255,215,0,0.35)" : "rgba(212,175,55,0.1)"}`, borderRadius: "12px", padding: "36px 28px", transition: "all 0.6s", opacity: allDone ? 1 : 0.35, position: "relative", overflow: "hidden", textAlign: "center" }}>
+              <div style={{ fontSize: "28px", marginBottom: "10px" }}>🏛️</div>
+              <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "18px", color: "#FFD700", marginBottom: "10px" }}>{allDone ? "Present Your Wallet" : "Complete All Trials First"}</div>
+              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "15px", fontStyle: "italic", color: "rgba(255,255,255,0.45)", margin: "0 0 24px" }}>{allDone ? "You have proven yourself worthy. Click below to submit your wallet and claim your spot." : `Complete all ${PANCHILIST_TASKS.length} trials above to unlock this.`}</p>
+              <button onClick={handleSubmit} disabled={!allDone}
+                style={{ padding: "16px 48px", borderRadius: "6px", border: "none", cursor: allDone ? "pointer" : "not-allowed", background: allDone ? "linear-gradient(135deg, #FFD700, #FFA500)" : "rgba(212,175,55,0.08)", fontFamily: "'Cinzel', serif", fontSize: "13px", letterSpacing: "3px", color: allDone ? "#000" : "rgba(255,255,255,0.2)", fontWeight: "700", boxShadow: allDone ? "0 0 24px rgba(255,215,0,0.35)" : "none", transition: "all 0.3s" }}
+              >CLAIM YOUR SPOT →</button>
             </div>
           </>
         ) : (
           <div style={{ textAlign: "center", padding: "56px 24px", background: "rgba(255,215,0,0.06)", border: "1px solid rgba(255,215,0,0.3)", borderRadius: "16px", position: "relative", overflow: "hidden" }}>
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 0%, rgba(255,215,0,0.08) 0%, transparent 60%)", pointerEvents: "none" }} />
             <div style={{ fontSize: "64px", marginBottom: "24px", animation: "sealReveal 0.6s ease both" }}>🍌</div>
-            <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "clamp(22px, 4vw, 40px)", color: "#FFD700", marginBottom: "16px", filter: "drop-shadow(0 0 20px rgba(255,215,0,0.5))" }}>Trial Complete</div>
-            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "17px", fontStyle: "italic", color: "rgba(255,255,255,0.6)", maxWidth: "460px", margin: "0 auto 28px", lineHeight: "1.8" }}>Your wallet has been recorded. The PANCHI elders will review your application. Watch the X page for the announcement.</p>
-            <div style={{ display: "inline-block", background: "rgba(255,215,0,0.08)", border: "1px solid rgba(255,215,0,0.2)", borderRadius: "8px", padding: "12px 20px", fontFamily: "'Cinzel', serif", fontSize: "11px", letterSpacing: "2px", color: "rgba(212,175,45,0.7)", wordBreak: "break-all" }}>
-              {wallet.slice(0, 6)}...{wallet.slice(-6)} — REGISTERED
+            <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "clamp(22px, 4vw, 40px)", color: "#FFD700", marginBottom: "16px", filter: "drop-shadow(0 0 20px rgba(255,215,0,0.5))" }}>You're on the list.</div>
+            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "17px", fontStyle: "italic", color: "rgba(255,255,255,0.6)", maxWidth: "460px", margin: "0 auto 28px", lineHeight: "1.8" }}>The PANCHI elders have received your application. Watch the Discord for the announcement. The jungle remembers.</p>
+            <div style={{ display: "inline-block", background: "rgba(255,215,0,0.08)", border: "1px solid rgba(255,215,0,0.2)", borderRadius: "8px", padding: "12px 20px", fontFamily: "'Cinzel', serif", fontSize: "11px", letterSpacing: "2px", color: "rgba(212,175,45,0.7)" }}>
+              🍌 PANCHILIST — REGISTERED
             </div>
           </div>
         )}
