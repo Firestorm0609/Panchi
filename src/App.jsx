@@ -155,7 +155,7 @@ function HeroSection() {
           background: "rgba(212,175,55,0.04)", border: "1px solid rgba(212,175,55,0.12)",
           borderRadius: "8px", overflow: "hidden", maxWidth: "560px", margin: "0 auto 40px",
         }}>
-          {[["FREE", "Mint Price"], ["2,000", "Total Supply"]].map(([num, label], i) => (
+          {[["FREE", "Mint Price"], ["1,111", "Total Supply"]].map(([num, label], i) => (
             <div key={label} style={{
               flex: 1, padding: "20px 12px", textAlign: "center",
               borderRight: i < 1 ? "1px solid rgba(212,175,55,0.1)" : "none",
@@ -348,7 +348,7 @@ function PanchilistSection({ sectionRef }) {
 
 function RoadmapSection() {
   const phases = [
-    { phase: "01", title: "Launch", status: "active", items: ["Free mint opens", "2,000 PANCHI released", "Community Discord launch"] },
+    { phase: "01", title: "Launch", status: "active", items: ["Free mint opens", "1,111 PANCHI released", "Community Discord launch"] },
     { phase: "02", title: "Community", status: "upcoming", items: ["Holder dashboard released", "Exclusive Discord roles", "First community vote", "Merch drop for holders"] },
     { phase: "03", title: "Growth", status: "upcoming", items: ["Secondary marketplace listing", "New trait reveals", "Collab drops (community vote)", "IRL meetup for holders"] },
     { phase: "04", title: "Expansion", status: "upcoming", items: ["Mobile app launch", "PANCHI 2 collection (holders get free mint)", "Cross-chain exploration", "Worldwide events & meetups"] },
@@ -399,7 +399,7 @@ function FAQSection() {
   const faqs = [
     { q: "How do I mint a PANCHI?", a: "Connect your Ethereum wallet, click Mint Free, and confirm the transaction. You only pay the network gas fee — the PANCHI itself is completely free." },
     { q: "What blockchain is PANCHI on?", a: "PANCHI is built on Ethereum — the most trusted and widely adopted NFT chain, with deep liquidity and marketplace support across the ecosystem." },
-    { q: "How many PANCHI can I mint?", a: "Maximum 20 per wallet. Total supply is capped at 2,000 forever. Once they're gone, they're gone." },
+    { q: "How many PANCHI can I mint?", a: "Maximum 20 per wallet. Total supply is capped at 1,111 forever. Once they're gone, they're gone." },
     { q: "What makes each PANCHI unique?", a: "Every PANCHI is algorithmically generated with a unique combination of traits — backgrounds, fur, accessories, expressions, and more. No two are the same." },
     { q: "What is the Panchilist?", a: "The Panchilist is an early access list for dedicated community members. Complete the trials, submit your wallet, and secure your spot before the public mint opens." },
     { q: "Will there be a secondary market?", a: "Yes. Once the collection mints out, PANCHI will be listed on major NFT marketplaces. Trade freely, hold forever — the choice is yours." },
