@@ -12,7 +12,6 @@ const PANCHILIST_TASKS = [
   { id: "twitter_follow", icon: "𝕏", title: "Follow PANCHI on X", description: "Follow @PANCHInft on X (Twitter) to stay updated.", actionLabel: "Follow on X", actionLink: "https://twitter.com/PANCHInft" },
   { id: "retweet", icon: "📣", title: "Spread the Word", description: "Repost the pinned PANCHI announcement on X.", actionLabel: "Repost", actionLink: "https://twitter.com/PANCHInft" },
   { id: "tag_friends", icon: "👥", title: "Bring Your People", description: "Tag 2 friends in the PANCHI announcement tweet.", actionLabel: "Tag Friends", actionLink: "https://twitter.com/PANCHInft" },
-  { id: "banana_oath", icon: "🍌", title: "Take the Banana Oath", description: "Post a tweet saying \"I am ready for PANCHI 🍌\" with the hashtag #PANCHIArmy.", actionLabel: "Post Tweet", actionLink: "https://twitter.com/intent/tweet?text=I+am+ready+for+PANCHI+🍌+%23PANCHIArmy" },
 ];
 
 const GLOBAL_STYLES = `
