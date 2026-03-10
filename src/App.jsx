@@ -350,7 +350,7 @@ function FAQSection() {
   const faqs = [
     { q: "How do I mint a PANCHI?", a: "Connect your Ethereum wallet, click Mint Free, and confirm the transaction. You only pay the network gas fee — the PANCHI itself is completely free." },
     { q: "What blockchain is PANCHI on?", a: "PANCHI is built on Ethereum — the most trusted and widely adopted NFT chain, with deep liquidity and marketplace support across the ecosystem." },
-    { q: "How many PANCHI can I mint?", a: "Maximum 20 per wallet. Total supply is capped at 2,222 forever. Once they're gone, they're gone." },
+    { q: "How many PANCHI can I mint?", a: "Maximum 1 per wallet. Total supply is capped at 2,222 forever. Once they're gone, they're gone." },
     { q: "What makes each PANCHI unique?", a: "Every PANCHI is algorithmically generated with a unique combination of traits — backgrounds, fur, accessories, expressions, and more. No two are the same." },
     { q: "What is the Panchilist?", a: "The Panchilist is an early access list for dedicated community members. Complete the trials, submit your wallet, and secure your spot before the public mint opens." },
   ];
