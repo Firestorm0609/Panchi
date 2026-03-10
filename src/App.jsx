@@ -155,7 +155,7 @@ function HeroSection() {
           background: "rgba(212,175,55,0.04)", border: "1px solid rgba(212,175,55,0.12)",
           borderRadius: "8px", overflow: "hidden", maxWidth: "560px", margin: "0 auto 40px",
         }}>
-          {[["FREE", "Mint Price"], ["1,111", "Total Supply"]].map(([num, label], i) => (
+          {[["FREE", "Mint Price"], ["2,222", "Total Supply"]].map(([num, label], i) => (
             <div key={label} style={{
               flex: 1, padding: "20px 12px", textAlign: "center",
               borderRight: i < 1 ? "1px solid rgba(212,175,55,0.1)" : "none",
@@ -346,63 +346,14 @@ function PanchilistSection({ sectionRef }) {
   );
 }
 
-function RoadmapSection() {
-  const phases = [
-    { phase: "01", title: "Launch", status: "active", items: ["Free mint opens", "1,111 PANCHI released", "Community Discord launch"] },
-    { phase: "02", title: "Community", status: "upcoming", items: ["Holder dashboard released", "Exclusive Discord roles", "First community vote", "Merch drop for holders"] },
-    { phase: "03", title: "Growth", status: "upcoming", items: ["Secondary marketplace listing", "New trait reveals", "Collab drops (community vote)", "IRL meetup for holders"] },
-    { phase: "04", title: "Expansion", status: "upcoming", items: ["Mobile app launch", "PANCHI 2 collection (holders get free mint)", "Cross-chain exploration", "Worldwide events & meetups"] },
-  ];
-
-  return (
-    <div className="section-pad" style={{ padding: "100px 48px 120px", background: "linear-gradient(180deg, #050300, #060400, #050300)", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", left: "50%", top: "160px", bottom: "80px", width: "1px", transform: "translateX(-50%)", background: "linear-gradient(to bottom, transparent, rgba(212,175,55,0.2) 10%, rgba(212,175,55,0.2) 90%, transparent)", pointerEvents: "none" }} />
-      <div style={{ maxWidth: "900px", margin: "0 auto", position: "relative", zIndex: 1 }}>
-        <div style={{ textAlign: "center", marginBottom: "72px" }}>
-          <div style={{ fontSize: "11px", letterSpacing: "6px", color: "rgba(212,175,55,0.6)", fontFamily: "'Cinzel', serif", marginBottom: "16px" }}>THE JOURNEY</div>
-          <h2 style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "clamp(28px, 5vw, 52px)", background: "linear-gradient(135deg, #FFD700, #FFA500)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", margin: "0 0 20px" }}>Roadmap</h2>
-          <div style={{ width: "80px", height: "1px", background: "linear-gradient(to right, transparent, #FFD700, transparent)", margin: "0 auto" }} />
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {phases.map(({ phase, title, status, items }, i) => {
-            const isLeft = i % 2 === 0;
-            const card = (
-              <div style={{ background: status === "active" ? "rgba(255,215,0,0.08)" : "rgba(212,175,55,0.04)", border: `1px solid ${status === "active" ? "rgba(255,215,0,0.4)" : "rgba(212,175,55,0.15)"}`, borderRadius: "12px", padding: "24px 28px", display: "inline-block", textAlign: "left", width: "100%" }}>
-                <div style={{ fontFamily: "'Cinzel', serif", fontSize: "9px", letterSpacing: "3px", color: status === "active" ? "#FFD700" : "rgba(212,175,55,0.5)", marginBottom: "8px" }}>{status === "active" ? "● LIVE NOW" : "COMING SOON"}</div>
-                <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "20px", color: "#FFD700", marginBottom: "14px" }}>{title}</div>
-                {items.map((item, j) => (
-                  <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: "8px", marginBottom: "8px" }}>
-                    <span style={{ color: status === "active" ? "#FFD700" : "rgba(212,175,55,0.4)", fontSize: "12px", marginTop: "2px" }}>—</span>
-                    <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "15px", color: status === "active" ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.4)", lineHeight: "1.5" }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            );
-            return (
-              <div key={phase} className="roadmap-grid" style={{ display: "grid", gridTemplateColumns: "1fr 60px 1fr", alignItems: "start", marginBottom: "40px" }}>
-                <div className={isLeft ? "" : "roadmap-left"} style={{ paddingRight: "28px", textAlign: "right" }}>{isLeft ? card : null}</div>
-                <div className="roadmap-center" style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "24px" }}>
-                  <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: status === "active" ? "linear-gradient(135deg, #FFD700, #FFA500)" : "rgba(212,175,55,0.08)", border: `2px solid ${status === "active" ? "#FFD700" : "rgba(212,175,55,0.3)"}`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Cinzel', serif", fontSize: "11px", color: status === "active" ? "#000" : "rgba(212,175,55,0.5)", fontWeight: "700", boxShadow: status === "active" ? "0 0 20px rgba(255,215,0,0.4)" : "none", flexShrink: 0 }}>{phase}</div>
-                </div>
-                <div className={!isLeft ? "" : "roadmap-left"} style={{ paddingLeft: "28px" }}>{!isLeft ? card : null}</div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function FAQSection() {
   const [open, setOpen] = useState(null);
   const faqs = [
     { q: "How do I mint a PANCHI?", a: "Connect your Ethereum wallet, click Mint Free, and confirm the transaction. You only pay the network gas fee — the PANCHI itself is completely free." },
     { q: "What blockchain is PANCHI on?", a: "PANCHI is built on Ethereum — the most trusted and widely adopted NFT chain, with deep liquidity and marketplace support across the ecosystem." },
-    { q: "How many PANCHI can I mint?", a: "Maximum 20 per wallet. Total supply is capped at 1,111 forever. Once they're gone, they're gone." },
+    { q: "How many PANCHI can I mint?", a: "Maximum 20 per wallet. Total supply is capped at 2,222 forever. Once they're gone, they're gone." },
     { q: "What makes each PANCHI unique?", a: "Every PANCHI is algorithmically generated with a unique combination of traits — backgrounds, fur, accessories, expressions, and more. No two are the same." },
     { q: "What is the Panchilist?", a: "The Panchilist is an early access list for dedicated community members. Complete the trials, submit your wallet, and secure your spot before the public mint opens." },
-    { q: "Will there be a secondary market?", a: "Yes. Once the collection mints out, PANCHI will be listed on major NFT marketplaces. Trade freely, hold forever — the choice is yours." },
   ];
 
   return (
@@ -470,8 +421,6 @@ export default function App() {
       <div id="collection"><CollectionSection /></div>
       <SectionDivider />
       <div id="panchilist"><PanchilistSection sectionRef={panchilistRef} /></div>
-      <SectionDivider />
-      <div id="roadmap"><RoadmapSection /></div>
       <SectionDivider />
       <div id="faq"><FAQSection /></div>
       <Footer />
